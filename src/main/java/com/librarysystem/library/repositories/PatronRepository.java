@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-@Transactional
 public interface PatronRepository extends JpaRepository<Patron,Integer>{
     @Query("select p from Patron p")
     List<Patron> findAllPatrons();

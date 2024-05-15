@@ -20,10 +20,10 @@ public class BorrowingRecord {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Patron patron;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Book book;
 

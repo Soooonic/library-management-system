@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 @Repository
-@Transactional
 public interface BorrowingRecordRepository extends JpaRepository<BorrowingRecord,Integer> {
     @Modifying
     @Query("update BorrowingRecord br set br.borrowingStatus= :#{#borrowingStatus}," +

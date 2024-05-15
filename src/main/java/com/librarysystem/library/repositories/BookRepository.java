@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.List;
 @Repository
-@Transactional
 public interface BookRepository extends JpaRepository<Book,Integer> {
     @Query("select b from Book b")
     List<Book> findAllBooks();

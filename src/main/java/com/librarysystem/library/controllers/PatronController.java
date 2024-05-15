@@ -15,32 +15,31 @@ public class PatronController {
     @Autowired
     PatronService patronService;
     @PostMapping("/api/patrons")
-    public ResponseEntity createPatron(@RequestBody Patron patron){
+    public ResponseEntity<String> createPatron(@RequestBody Patron patron){
         patronService.createPatron(patron);
-        return new ResponseEntity("patron added to the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.CREATED);
     }
 
     @GetMapping("/api/patrons")
-    public List<Patron> findAllPatrons(){
-        return patronService.findAllPatrons();
+    public ResponseEntity<List<Patron>> findAllPatrons(){
+        return new ResponseEntity<>(patronService.findAllPatrons(),HttpStatus.OK);
     }
 
     @GetMapping("/api/patrons/{id}")
-    public Patron findPatronById(@PathVariable int id){
-        return patronService.findPatronById(id);
+    public ResponseEntity<Patron> findPatronById(@PathVariable int id){
+        return new ResponseEntity<>(patronService.findPatronById(id),HttpStatus.OK);
     }
 
 
     @PutMapping("/api/patrons/{id}")
-    public ResponseEntity updatePatronDetails(@PathVariable int id,@RequestBody Patron patron){
+    public ResponseEntity<String> updatePatronDetails(@PathVariable int id,@RequestBody Patron patron){
         patronService.updatePatronDetails(id,patron);
-        return new ResponseEntity("patron updated in the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 
     @DeleteMapping("/api/patrons/{id}")
-    public ResponseEntity deletePatron(@PathVariable int id){
+    public ResponseEntity<String> deletePatron(@PathVariable int id){
         patronService.deletePatron(id);
-        return new ResponseEntity("patron deleted from the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.OK);
     }
-
 }

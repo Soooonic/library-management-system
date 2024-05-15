@@ -14,28 +14,28 @@ public class BookController {
     @Autowired
     BookService bookService;
     @PostMapping("/api/books")
-    public ResponseEntity createBook(@RequestBody Book book){
+    public ResponseEntity<String> createBook(@RequestBody Book book){
         bookService.createBook(book);
-        return new ResponseEntity("Book added to the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.CREATED);
     }
     @GetMapping("/api/books")
-    public List<Book> findAllBooks(){
-        return bookService.findAllBooks();
+    public ResponseEntity<List<Book>> findAllBooks(){
+        return new ResponseEntity<>(bookService.findAllBooks(),HttpStatus.OK);
     }
     @GetMapping("/api/books/{id}")
-    public Book findBookById(@PathVariable int id){
-        return bookService.findBookById(id);
+    public ResponseEntity<Book> findBookById(@PathVariable int id){
+        return new ResponseEntity<>(bookService.findBookById(id),HttpStatus.OK);
     }
 
     @PutMapping("/api/books/{id}")
-    public ResponseEntity updateBookDetails(@PathVariable int id,@RequestBody Book book){
+    public ResponseEntity<String> updateBookDetails(@PathVariable int id,@RequestBody Book book){
         bookService.updateBookDetails(id,book);
-        return new ResponseEntity("Book updated in the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 
     @DeleteMapping("/api/books/{id}")
-    public ResponseEntity deleteBook(@PathVariable int id){
+    public ResponseEntity<String> deleteBook(@PathVariable int id){
         bookService.deleteBook(id);
-        return new ResponseEntity("Book deleted from the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 }

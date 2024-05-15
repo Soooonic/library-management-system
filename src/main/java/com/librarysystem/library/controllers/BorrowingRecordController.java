@@ -17,14 +17,14 @@ public class BorrowingRecordController {
     @Autowired
     BorrowingRecordService borrowingRecordService;
     @PostMapping("/api/borrow/{bookId}/patron/{patronId}")
-    public ResponseEntity createBorrowingRecord(@PathVariable ("bookId")int bookId ,@PathVariable ("patronId")int patronId)throws Exception{
+    public ResponseEntity<String> createBorrowingRecord(@PathVariable ("bookId")int bookId ,@PathVariable ("patronId")int patronId)throws Exception{
         borrowingRecordService.createBorrowingRecord(bookId,patronId);
-        return new ResponseEntity("Borrowing Record added to the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.CREATED);
     }
 
     @PutMapping("/api/return/{bookId}/patron/{patronId}")
-    public ResponseEntity updateBorrowingRecordDetails(@PathVariable ("bookId")int bookId ,@PathVariable ("patronId")int patronId) throws Exception{
+    public ResponseEntity<String> updateBorrowingRecordDetails(@PathVariable ("bookId")int bookId ,@PathVariable ("patronId")int patronId) throws Exception{
         borrowingRecordService.updateBorrowingRecordDetails(bookId,patronId);
-        return new ResponseEntity("Borrowing Record updated in the library system", HttpStatus.ACCEPTED);
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 }
